@@ -4,9 +4,10 @@ import { Route, Switch } from "react-router-dom";
 import ProductList from "./views/ProductList";
 import Homepage from "./views/Homepage";
 import Navigation from "./components/Navigation";
+import ProductDetail from "./components/ProductDetail";
 
 function App(props) {
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ productList: [] });
 
   useEffect(() => {
     setState({
@@ -108,16 +109,20 @@ function App(props) {
     <div className="App">
       <div>
         <h1>Welcome to Kenzie Hardware!</h1>
-        <Navigation/>
+        <Navigation />
       </div>
       <Switch>
         <Route
           path="/products"
+          exact
           render={(props) => (
             <ProductList {...props} productList={state.productList} />
           )}
         />
-        <Route path="/" component={Homepage} />
+        <Route path="/products/detail/:productId">
+          <ProductDetail></ProductDetail>
+        </Route>
+        <Route path="/" exact component={Homepage} />
       </Switch>
     </div>
   );
