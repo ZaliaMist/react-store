@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 
 function ProductDetail(props) {
-  const [product, setProduct] = useState({});
-  // When this component loads, get the Product ID from the url parameter.
+  // const [product, setProduct] = useState({});
+  // When this componen loads, get the Product ID from the url parameter.
   // Then find the matching product from the productList prop, and assign it to product
 
-  useEffect(() => {
-    let myObject = props.productList.find((item) => item.id === idYouAreLookingFor) || {};
-  }, []);
-
+  const {productId} = useParams() 
+  // console.log(props.productList)
+  // useEffect( () => {
+  //   setProduct( props.productList.find( item => item.id === productId ) );
+  // });
+  // setTimeout(() => {
+  //       setProduct(props.productList)
+  //     }, 1000);
+  const product = props.productList.find( item => item.id === Number( productId ) )
+  
   return (
     <div>
       <h3>{product.name}</h3>
